@@ -1,0 +1,3 @@
+BLOCKSIZE_HEX =24
+BLOCKSIZE_byte =96
+Rounds = 12
