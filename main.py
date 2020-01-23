@@ -2,12 +2,14 @@ import sys
 import os.path
 import algFunctions as a
 
+
 def demo():
     plaintext = "00112233445566778899aabbccddeeff"
-    ciphertext = a.encrypt(plaintext,'')
-    print (ciphertext)
-    decipher = a.decrypt(ciphertext,'')
+    ciphertext = a.encrypt(plaintext, '')
+    print(ciphertext)
+    decipher = a.decrypt(ciphertext, '')
     print(decipher)
+
 
 def main():
 
@@ -113,6 +115,7 @@ def main():
 
     # print('')
     # sys.exit()
+
 
 if __name__ == '__main__':
     main()
