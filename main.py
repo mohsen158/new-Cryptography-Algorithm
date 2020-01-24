@@ -1,16 +1,21 @@
 import sys
 import os.path
 import algFunctions as a
+import tests as tests
+from nistTests.FrequencyTest import FrequencyTest
 
 
 def demo():
+
+    tests.allTests()
+
     plaintext = "00112233445566778899aabbccddeeff"
-    count=0
+    count = 0
     ciphertext = a.encrypt(plaintext, '')
     for i in range(10000):
-        ciphertext=a.encrypt(ciphertext,'')
-        count+=int(ciphertext[47],16)%2
-    print (count)
+        ciphertext = a.encrypt(ciphertext, '')
+        count += int(ciphertext[47], 16) % 2
+    print(count)
     print(ciphertext)
     decipher = a.decrypt(ciphertext, '')
     print(decipher)
