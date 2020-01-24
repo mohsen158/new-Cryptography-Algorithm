@@ -5,7 +5,12 @@ import algFunctions as a
 
 def demo():
     plaintext = "00112233445566778899aabbccddeeff"
+    count=0
     ciphertext = a.encrypt(plaintext, '')
+    for i in range(10000):
+        ciphertext=a.encrypt(ciphertext,'')
+        count+=int(ciphertext[47],16)%2
+    print (count)
     print(ciphertext)
     decipher = a.decrypt(ciphertext, '')
     print(decipher)
