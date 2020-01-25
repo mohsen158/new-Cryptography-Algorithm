@@ -1,3 +1,5 @@
 BLOCKSIZE_HEX =24
 BLOCKSIZE_byte =96
-Rounds = 12
+Rounds = 14
+MAX_TESTS_SIZE=100
+KEY=''

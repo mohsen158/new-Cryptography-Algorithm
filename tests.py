@@ -12,9 +12,11 @@ from nistTests.RandomExcursions import RandomExcursions
 import algFunctions as a
 import os
 import random
-
+import avalanche as ava
 
 def allTests():
+
+    ava.avalancheExecute()
     # Open Data File and read the binary data of e
     data_path = os.path.join(os.getcwd(), 'data', 'data.e')
     if os.path.exists(data_path):
@@ -43,10 +45,7 @@ def generateRandomeTestSample():
         randomBitsString = randomBitsString+(str(int(encryptText[23], 16) % 2))
     pass
 
-
-def avalanche():
-    pass
-
+ 
 
 def nistTest():
     pass

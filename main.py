@@ -7,6 +7,7 @@ from nistTests.FrequencyTest import FrequencyTest
 
 def demo():
 
+    print('2.01. Frequency Test:\t\t\t\t\t\t\t\t', FrequencyTest.monobit_test('0101010101010'))
     tests.allTests()
 
     plaintext = "00112233445566778899aabbccddeeff"
