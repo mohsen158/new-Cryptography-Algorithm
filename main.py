@@ -3,23 +3,23 @@ import os.path
 import algFunctions as a
 import tests as tests
 from nistTests.FrequencyTest import FrequencyTest
+from pyfiglet import Figlet
 
-
+f = Figlet(font='slant')
 def demo():
-
-    print('2.01. Frequency Test:\t\t\t\t\t\t\t\t', FrequencyTest.monobit_test('0101010101010'))
+    # print('2.01. Frequency Test:\t\t\t\t\t\t\t\t', FrequencyTest.monobit_test('0101010101010'))
     tests.allTests()
 
-    plaintext = "00112233445566778899aabbccddeeff"
-    count = 0
-    ciphertext = a.encrypt(plaintext, '')
-    for i in range(10000):
-        ciphertext = a.encrypt(ciphertext, '')
-        count += int(ciphertext[47], 16) % 2
-    print(count)
-    print(ciphertext)
-    decipher = a.decrypt(ciphertext, '')
-    print(decipher)
+    # plaintext = "00112233445566778899aabbccddeeff"
+    # count = 0
+    # ciphertext = a.encrypt(plaintext, '')
+    # for i in range(10000):
+    #     ciphertext = a.encrypt(ciphertext, '')
+    #     count += int(ciphertext[47], 16) % 2
+    # print(count)
+    # print(ciphertext)
+    # decipher = a.decrypt(ciphertext, '')
+    # print(decipher)
 
 
 def main():

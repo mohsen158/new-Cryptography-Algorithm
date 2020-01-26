@@ -12,11 +12,11 @@ def f(word):
     temp = (temp + sBoxes.s[1][word >> 16 & 0xff]) % 2**32
     temp = temp ^ sBoxes.s[2][word >> 8 & 0xff]
     temp = (temp + sBoxes.s[3][word & 0xff]) % 2**32
-    while temp <= 2**31 - 1:
-        temp = temp << 1
-    while temp > 2**32 - 1:
-        temp = temp >> 1
-    return hex(temp).split('x')[-1]
+    # while temp <= 2**31 - 1:
+    #     temp = temp << 1
+    # while temp > 2**32 - 1:
+    #     temp = temp >> 1
+    return hex(temp).split('x')[-1].zfill(8)
 
 
 def decipher(block, key):

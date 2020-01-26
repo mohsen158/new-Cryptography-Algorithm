@@ -1,5 +1,7 @@
 from numpy import zeros as zeros
 from scipy.special import gammaincc as gammaincc
+from tqdm import trange
+
 class Serial:
 
     @staticmethod
@@ -23,7 +25,7 @@ class Serial:
 
         # Get max length one patterns for m, m-1, m-2
         max_pattern = ''
-        for i in range(pattern_length + 1):
+        for i in trange(pattern_length + 1):
             max_pattern += '1'
 
         # Step 02: Determine the frequency of all possible overlapping m-bit blocks,
@@ -33,7 +35,7 @@ class Serial:
         vobs_02 = zeros(int(max_pattern[0:pattern_length - 1:], 2) + 1)
         vobs_03 = zeros(int(max_pattern[0:pattern_length - 2:], 2) + 1)
 
-        for i in range(length_of_binary_data):
+        for i in trange(length_of_binary_data):
             # Work out what pattern is observed
             vobs_01[int(binary_data[i:i + pattern_length:], 2)] += 1
             vobs_02[int(binary_data[i:i + pattern_length - 1:], 2)] += 1
@@ -44,7 +46,7 @@ class Serial:
         # Step 03 Compute for ψs
         sums = zeros(3)
         for i in range(3):
-            for j in range(len(vobs[i])):
+            for j in trange(len(vobs[i])):
                 sums[i] += pow(vobs[i][j], 2)
             sums[i] = (sums[i] * pow(2, pattern_length - i) / length_of_binary_data) - length_of_binary_data
 

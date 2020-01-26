@@ -1,9 +1,12 @@
 import algFunctions as a
 import random
 import constants as const
-
+from pyfiglet import Figlet
+f  = Figlet(font='basic')
 
 def avalancheExecute():
+    print (f.renderText('Avalanche test:'))
+
     avalancheTest = [[0 for i in range(96)]for n in range(96)]
     for i in range(const.MAX_TESTS_SIZE):
         basePlainText, baseCipheText = generateRandomeTestSample()
@@ -11,7 +14,7 @@ def avalancheExecute():
         # oneStage= avalanchOneStage(avalancheTest,stage)
         avalancheTest = cumulative2Stages(avalancheTest, oneStage)
         # print(i)
-    print(avalancheTest)
+    return avalancheTest
     pass
 
 

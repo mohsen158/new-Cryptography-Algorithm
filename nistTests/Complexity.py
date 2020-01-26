@@ -3,6 +3,7 @@ from numpy import dot as dot
 from numpy import histogram as histogram
 from numpy import zeros as zeros
 from scipy.special import gammaincc as gammaincc
+from tqdm import trange ,tqdm
 
 class ComplexityTest:
 
@@ -41,13 +42,13 @@ class ComplexityTest:
             block_end = block_size
             block_start = 0
             blocks = []
-            for i in range(number_of_block):
+            for i in trange(number_of_block):
                 blocks.append(binary_data[block_start:block_end])
                 block_start += block_size
                 block_end += block_size
 
             complexities = []
-            for block in blocks:
+            for block in tqdm(blocks):
                 complexities.append(ComplexityTest.berlekamp_massey_algorithm(block))
 
             t = ([-1.0 * (((-1) ** block_size) * (chunk - mean) + 2.0 / 9) for chunk in complexities])
@@ -55,7 +56,7 @@ class ComplexityTest:
             im = ([((vg[ii] - number_of_block * pi[ii]) ** 2) / (number_of_block * pi[ii]) for ii in range(7)])
 
             xObs = 0.0
-            for i in range(len(pi)):
+            for i in trange(len(pi)):
                 xObs += im[i]
 
             # P-Value = igamc(K/2, xObs/2)
