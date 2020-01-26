@@ -12,6 +12,13 @@ def f(word):
     temp = (temp + sBoxes.s[1][word >> 16 & 0xff]) % 2**32
     temp = temp ^ sBoxes.s[2][word >> 8 & 0xff]
     temp = (temp + sBoxes.s[3][word & 0xff]) % 2**32
+
+
+    # temp = sBoxes.s[0][word >> 24]
+    # temp = (temp ^ sBoxes.s[1][word >> 16 & 0xff])  
+    # temp2 = sBoxes.s[3][word & 0xff] ^ sBoxes.s[2][word >> 8 & 0xff]
+    # temp = (temp + temp2) % 2**32
+
     # while temp <= 2**31 - 1:
     #     temp = temp << 1
     # while temp > 2**32 - 1:

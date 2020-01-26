@@ -2,13 +2,15 @@ import algFunctions as a
 import random
 import constants as const
 from pyfiglet import Figlet
+from tqdm import trange
+import time
 f  = Figlet(font='basic')
 
 def avalancheExecute():
     print (f.renderText('Avalanche test:'))
 
     avalancheTest = [[0 for i in range(96)]for n in range(96)]
-    for i in range(const.MAX_TESTS_SIZE):
+    for i in trange(const.MAX_TESTS_SIZE):
         basePlainText, baseCipheText = generateRandomeTestSample()
         oneStage = avalanchOneStage(basePlainText, baseCipheText)
         # oneStage= avalanchOneStage(avalancheTest,stage)
