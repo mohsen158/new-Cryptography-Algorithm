@@ -36,7 +36,7 @@ def cipher(block, key):
     use splite func to splite 3 word
     use round func to cipher for 12 rounds
     """
-    for r in range(c.Rounds-1):
+    for r in range(c.Rounds):
         L, M, R = u.split(block)
         Lf = u.xor(M, f(L))
         block = ''.join(str(x) for x in Lf)+R+L
