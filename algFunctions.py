@@ -1,6 +1,7 @@
 import utilsFunctions as u
 import constants as c
 import sBoxes as sBoxes
+from itertools import permutations
 
 
 def f(word):
@@ -13,17 +14,24 @@ def f(word):
     temp = temp ^ sBoxes.s[2][word >> 8 & 0xff]
     temp = (temp + sBoxes.s[3][word & 0xff]) % 2**32
 
+    return hex(temp).split('x')[-1].zfill(8)
 
-    # temp = sBoxes.s[0][word >> 24]
-    # temp = (temp ^ sBoxes.s[1][word >> 16 & 0xff])  
-    # temp2 = sBoxes.s[3][word & 0xff] ^ sBoxes.s[2][word >> 8 & 0xff]
-    # temp = (temp + temp2) % 2**32
+    temp = sBoxes.s[0][word >> 24]
+    temp = (temp ^ sBoxes.s[1][word >> 16 & 0xff])
+    permIndex = temp & 0x7fff
+    temp2 = sBoxes.s[3][word & 0xff] ^ sBoxes.s[2][word >> 8 & 0xff]
+    temp = (temp + temp2) % 2**32
+    hexTemp = hex(temp).split('x')[-1].zfill(8)
 
+    # permTemp = list(permutations(hexTemp))
+    # permuted = ''. join(permTemp[permIndex])
+
+    permuted = u.getPermuted(hexTemp, permIndex)
     # while temp <= 2**31 - 1:
     #     temp = temp << 1
     # while temp > 2**32 - 1:
     #     temp = temp >> 1
-    return hex(temp).split('x')[-1].zfill(8)
+    return hexTemp
 
 
 def decipher(block, key):
@@ -43,7 +51,7 @@ def cipher(block, key):
     use splite func to splite 3 word
     use round func to cipher for 12 rounds
     """
-    for r in range(c.Rounds):
+    for r in range(c.Rounds-1):
         L, M, R = u.split(block)
         Lf = u.xor(M, f(L))
         block = ''.join(str(x) for x in Lf)+R+L

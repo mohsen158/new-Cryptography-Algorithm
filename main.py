@@ -6,6 +6,8 @@ from nistTests.FrequencyTest import FrequencyTest
 from pyfiglet import Figlet
 
 f = Figlet(font='slant')
+
+
 def demo():
     # print('2.01. Frequency Test:\t\t\t\t\t\t\t\t', FrequencyTest.monobit_test('0101010101010'))
     tests.allTests()
