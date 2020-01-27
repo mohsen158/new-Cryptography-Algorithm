@@ -66,11 +66,13 @@ def printAvalancheRes(res):
 def encryptionDecryptinTest():
     print(f.renderText('Enc-Dec  test:'))
     randomPlainText = generateRandomePlainText()
+    randomKeyText = generateRandomePlainText()
+
     print(' plain text is : \t \x1b[1;45;46m' + randomPlainText + '\x1b[0m')
-    cipher = a.encrypt(randomPlainText, '')
+    cipher = a.encrypt(randomPlainText, randomKeyText)
     print(' cipher  is : \t\t \x1b[1;45;48m' + cipher + '\x1b[0m')
     print(' deciphering ...')
-    decipher = a.decrypt(cipher, '')
+    decipher = a.decrypt(cipher, randomKeyText)
     print(' cipher  is : \t\t \x1b[1;47;42m' + decipher + '\x1b[0m')
     successText = '\x1b[6;30;42m' + 'Success!' + '\x1b[0m'
     failText = '\x1b[6;30;41m' + 'Fail!' + '\x1b[0m'
@@ -93,7 +95,7 @@ def generateRandomeTestSample(i):
     randomBitsString = ''
 
     for n in trange(i):
-        encryptText = a.encrypt(encryptText, '')
+        encryptText = a.encrypt(encryptText, const.KEY)
         randomBitsString = randomBitsString+(str(int(encryptText[23], 16) % 2))
     return randomBitsString
 

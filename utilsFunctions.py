@@ -2,6 +2,13 @@ import os
 from utils.permList import permList
 
 
+def intListToHexString(intList):
+    hexString = ''
+    for i in intList:
+        hexString = hexString+hex(i).split('x')[-1].zfill(2)
+    return hexString
+
+
 def test():
 
     return 4

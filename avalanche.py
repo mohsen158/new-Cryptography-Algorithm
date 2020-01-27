@@ -4,10 +4,11 @@ import constants as const
 from pyfiglet import Figlet
 from tqdm import trange
 import time
-f  = Figlet(font='basic')
+f = Figlet(font='basic')
+
 
 def avalancheExecute():
-    print (f.renderText('Avalanche test:'))
+    print(f.renderText('Avalanche test:'))
 
     avalancheTest = [[0 for i in range(96)]for n in range(96)]
     for i in trange(const.MAX_TESTS_SIZE):
@@ -79,5 +80,5 @@ def generateRandomeTestSample():
                             for n in range(24)]
     randomPlainText = "".join(randomPlainTextArray)
 
-    encryptText = a.encrypt(randomPlainText, '')
+    encryptText = a.encrypt(randomPlainText, const.KEY)
     return randomPlainText, encryptText
