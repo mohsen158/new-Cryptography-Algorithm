@@ -19,7 +19,7 @@ def AddRoundKey(state, key):
     return new_state
 
 
-def KeyExpansion(key, Nb=4, Nk=4, Nr=10):
+def KeyExpansion(key, Nb=4, Nk=3, Nr=10):
     w = []
     for word in key:
         w.append(word[:])
@@ -44,7 +44,10 @@ def KeyExpansion(key, Nb=4, Nk=4, Nr=10):
     return w
 
 
-def process_key(key, Nk=4):
+def process_key(key, Nk=3):
+    """
+    total number of subkey in each round
+    """
     try:
         key = key.replace(" ", "")
         return [[int(key[i*8+j*2:i*8+j*2+2], 16) for j in range(4)]
