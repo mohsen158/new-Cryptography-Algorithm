@@ -44,7 +44,7 @@ def inputOrGenerateRandomSequenc(i):
     else:
         binary_data = generateRandomeTestSample(i)
         f = open("data/data.txt", "a")
-        f.write("Now the file has more content!")
+        f.write(binary_data)
         f.close()
     return binary_data.zfill(i)
 

@@ -18,6 +18,18 @@ def AddRoundKey(state, key):
 
     return new_state
 
+def XORallState(w):
+    res=0
+    for word in w:
+        for el in word:
+            res=res^el
+    return res
+def XORallWordTogether(w):
+    res=[0]*3
+    for i in range(3):
+        for word in w:
+            res[i]=res[i]^word[i]
+    return res
 
 def KeyExpansion(key, Nb=4, Nk=3, Nr=10):
     w = []
@@ -30,13 +42,16 @@ def KeyExpansion(key, Nb=4, Nk=3, Nr=10):
         temp = w[i-1][:]
         if i % Nk == 0:
             # temp = SubWord(RotWord(temp))
-            temp[0] ^= Rcon[(i//Nk)]
+            XORed = XORallState(w)
+            #temp[0] ^= Rcon[(i//Nk)]
+            temp[0] ^= Rcon[(XORed%256)]
         # elif Nk > 6 and i % Nk == 4:
         #     temp = SubWord(temp)
-
+        XORedWord=XORallWordTogether(w)
         for j in range(len(temp)):
             temp[j] ^= w[i-Nk][j]
-
+        for n in range(3):
+            temp[n]=temp[n]^XORedWord[n]
         w.append(temp[:])
 
         i += 1
