@@ -74,9 +74,9 @@ def encryptionDecryptinTest():
     print(' plain text is : \t \x1b[1;45;46m' + randomPlainText + '\x1b[0m')
     cipher = a.encrypt(randomPlainText, randomKeyText)
     print(' cipher  is : \t\t \x1b[1;45;48m' + cipher + '\x1b[0m')
-    print(' deciphering ...')
+    print(' decrypting ...')
     decipher = a.decrypt(cipher, randomKeyText)
-    print(' cipher  is : \t\t \x1b[1;47;42m' + decipher + '\x1b[0m')
+    print(' decrypted  is : \t\t \x1b[1;47;42m' + decipher + '\x1b[0m')
     successText = '\x1b[6;30;42m' + 'Success!' + '\x1b[0m'
     failText = '\x1b[6;30;41m' + 'Fail!' + '\x1b[0m'
     if randomPlainText == decipher:

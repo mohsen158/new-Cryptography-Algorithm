@@ -81,8 +81,7 @@ def decipher(block, key):
 
 def cipher(block, key):
     """
-    use splite func to splite 3 word
-    use round func to cipher for 12 rounds
+    fiestel structure in alg 
     """
     keyes = generateKey(key)
     for r in range(c.Rounds-1):
