@@ -99,6 +99,14 @@ def cipher(block, key):
 # def InvCipher
 
 
+def keyRefine(key):
+    if len(key) < 24:
+        raise "Key Should be 96 bit long"
+    elif len(key) > 24:
+        key = key[:24]
+    return key  # If key size is above 8bytes, cut to be 8bytes long
+
+
 def encrypt(plaintext, key):
     """
     splite inpute text to 96 bits block
@@ -115,6 +123,7 @@ def encrypt(plaintext, key):
         for i in range(lengthOfLastBlock, c.BLOCKSIZE_HEX):
             plaintext[len(plaintext)-1] += '0'
 
+    key = keyRefine(key)
     # print(lengthOfLastBlock)
     # TODO key generation things
 

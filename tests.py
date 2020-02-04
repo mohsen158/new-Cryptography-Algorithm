@@ -18,21 +18,43 @@ import constants as const
 from pyfiglet import Figlet
 from tqdm import trange
 import time
+import utilsFunctions as u
 f = Figlet(font='basic')
 
 
 def allTests():
 
+    encrypteeee = a.encrypt('000000000000000000000000',
+                            '000000000000000000000000')
+    encrypteeee2 = a.encrypt('000000000000000000000001',
+                             '000000000000000000000000')
+
+    decrypteeee = a.decrypt('c213b237dd00caee86bf3d7c',
+                            '000000000000000000000000')
+
+    testHexToBin = u.hexToBinery(encrypteeee)
+    testHexToBin2 = u.hexToBinery(encrypteeee2)
+    xorBinTest = u.xorBinery(testHexToBin, testHexToBin2)
+
+    testBinTOHex = u.bineryToHex(testHexToBin)
+
+    xorhextest = u.xor('a', 'a')
+
     encryptionDecryptinTest()
     res = ava.avalancheExecute()
     printAvalancheRes(res)
-    randomSequenc = inputOrGenerateRandomSequenc(
+    randomSequencLastBit = inputOrGenerateRandomSequencOfbLastBit(
         const.RANDOM_SEQUENCE_MAX_SIZE)
-    nistTestsExec(randomSequenc)
+
+    nistTestsExec(randomSequencLastBit)
+
+    randomSequenc = inputOrGenerateRandomSequencOfb(
+        const.RANDOM_SEQUENCE_MAX_SIZE_OFB_MODE)
+
     # Open Data File and read the binary data of e
 
 
-def inputOrGenerateRandomSequenc(i):
+def inputOrGenerateRandomSequencOfbLastBit(i):
     data_path = os.path.join(os.getcwd(), 'data', 'data.e')
     binary_data = ''
     if os.path.exists(data_path):
@@ -42,8 +64,25 @@ def inputOrGenerateRandomSequenc(i):
             data_list.append(line.strip().rstrip())
         binary_data = ''.join(data_list)
     else:
-        binary_data = generateRandomeTestSample(i)
-        f = open("data/data.txt", "a")
+        binary_data = generateRandomeTestSampleOfbLastBit(i)
+        f = open("data/ofbLastBit.text", "w")
+        f.write(binary_data)
+        f.close()
+    return binary_data.zfill(i)
+
+
+def inputOrGenerateRandomSequencOfb(i):
+    data_path = os.path.join(os.getcwd(), 'data', 'data.e')
+    binary_data = ''
+    if os.path.exists(data_path):
+        handle = open(data_path)
+        data_list = []
+        for line in handle:
+            data_list.append(line.strip().rstrip())
+        binary_data = ''.join(data_list)
+    else:
+        binary_data = generateRandomeTestSampleOfb(i)
+        f = open("data/ofb.text", "w")
         f.write(binary_data)
         f.close()
     return binary_data.zfill(i)
@@ -86,7 +125,7 @@ def encryptionDecryptinTest():
     pass
 
 
-def generateRandomeTestSample(i):
+def generateRandomeTestSampleOfbLastBit(i):
     """
     this function generate array of bytes from encryption alg
     the output length is 1000 bit
@@ -100,6 +139,23 @@ def generateRandomeTestSample(i):
     for n in trange(i):
         encryptText = a.encrypt(encryptText, const.KEY)
         randomBitsString = randomBitsString+(str(int(encryptText[23], 16) % 2))
+    return randomBitsString
+
+
+def generateRandomeTestSampleOfb(i):
+    """
+    this function generate array of bytes from encryption alg
+    the output length is i*96 bit
+    """
+    randomPlainTextArray = [random.choice('0123456789abcdef')
+                            for n in range(24)]
+    randomPlainText = "".join(randomPlainTextArray)
+    encryptText = randomPlainText
+    randomBitsString = ''
+
+    for n in trange(i):
+        encryptText = a.encrypt(encryptText, const.KEY)
+        randomBitsString = randomBitsString+u.hexToBinery(encryptText)
     return randomBitsString
 
 
